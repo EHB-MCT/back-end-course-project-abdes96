@@ -44,7 +44,7 @@ Route::post('/itemedit', function () {
 
 //admin routes
 Route::group(['prefix' => 'admin'], function () {
-
+//home
     Route::get('', [
         'uses' => 'App\Http\Controllers\AdminController@getIndex',
         'as' => 'admin.index',
@@ -58,10 +58,22 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
     // Edit
-    Route::get('edit', [
+    Route::get('edit/{id}', [
         'as' => 'admin.edit',
         'uses' => 'App\Http\Controllers\AdminController@getEdit'
     ]);
+
+    // Update
+    Route::post('update', [
+        'as' => 'admin.update',
+        'uses' => 'App\Http\Controllers\AdminController@postUpdateItem'
+    ]);
+
+    Route::get('delete/{id}', [
+        'as' => 'admin.delete',
+        'uses' => 'App\Http\Controllers\AdminController@deleteItem'
+    ]);
+
 
 });
 

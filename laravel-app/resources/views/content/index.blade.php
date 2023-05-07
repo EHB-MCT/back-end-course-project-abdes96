@@ -11,12 +11,12 @@
         @foreach($items as $item)
     <div class="jumbotron">
 
-         <h2 class="display-4"> zoekertje 1</h2>
+         <h2 class="display-4"> Vraag 1</h2>
         <p class="lead"> {{$item['title']}}
         </p>
         <p>{{$item['content']}}</p>
         <div>
-        <a  class="btn btn-primary   mb-4" href="{{route('item',['id' => $item['id']]) }}" role="button" >details</a>
+        <a  class="btn btn-primary   mb-4" href="{{route('item',['id'=> 1]) }}" role="button" >details</a>
     </div>
     </div>
 
