@@ -3,13 +3,9 @@
 @section('content')
 
     <div class="jumbotron">
-        @if(session('forminput'))
-        <div class="alert alert-success" role="alert">
-            zoekertje aangemaakt met titel : {{ session('forminput') }}
-        </div>
-        @endif
 
-        <div class="card text-center mt-3 bg-info">
+
+            <div class="card text-center mt-3 bg-info">
 
             <h2 class="display-4"> zoekertje 1</h2>
             <p class="lead"> Boardgames</p>

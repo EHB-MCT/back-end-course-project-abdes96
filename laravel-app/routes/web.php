@@ -14,9 +14,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 //generic routes
-Route::get('/',[
-    'uses'=>'App\Http\Controllers\ItemController@getIndex',
-    'as'=> 'home'
+Route::get('/', [
+    'uses' => 'App\Http\Controllers\ItemController@getIndex',
+    'as' => 'home'
 ]);
 
 
@@ -24,27 +24,20 @@ Route::get('/about', function () {
     return view('other.about');
 })->name('about');
 
-Route::get('/item/{id}', function ($id) {
-    return view('content.item' , ['nieuweVar'=>$id]);
-})->name('item');
+Route::get('/item/{id}', [
+    'uses' => 'App\Http\Controllers\ItemController@getItem',
+    'as' => 'item'
+]);
 
 
 //create item route
-Route::post('/itemcreate', function(\Illuminate\Http\Request $request , Illuminate\Validation\Factory $validator) {
-
-    $validator->make($request->all(),[
-        'title' => 'required|min:5',
-        'content' => 'required',
-    ])->validate();
-
-    //$data = $request->all();
-    $title = $request->input('title');
-    return redirect( 'admin')->with('forminput',$title);
-
-})->name('itemcreate');
+Route::post('/itemcreate', [
+    'uses' => 'App\Http\Controllers\ItemController@postCreateItem',
+    'as' =>'itemcreate'
+]);
 
 // edit item route
-Route::post('/itemedit', function() {
+Route::post('/itemedit', function () {
     return redirect()->route('admin.index');
 
 })->name('');

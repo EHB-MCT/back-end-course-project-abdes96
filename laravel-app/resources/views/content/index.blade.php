@@ -1,34 +1,27 @@
 @extends('layouts.master')
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div class="container">
-
-    <div class="card text-center mt-3 bg-info">
+        @foreach($items as $item)
+    <div class="jumbotron">
 
          <h2 class="display-4"> zoekertje 1</h2>
-        <p class="lead"> Boardgames</p>
-        <p>allerhande boardgames</p>
+        <p class="lead"> {{$item['title']}}
+        </p>
+        <p>{{$item['content']}}</p>
         <div>
-        <a  class="btn btn-primary mb-4" href="{{route('item',['id'=> 1]) }}" role="button" >details</a>
+        <a  class="btn btn-primary   mb-4" href="{{route('item',['id' => $item['id']]) }}" role="button" >details</a>
     </div>
     </div>
-        <div class="card text-center mt-5 bg-info">
 
-        <h2 class="display-4"> zoekertje 2</h2>
-        <p> gitaar</p>
-            <div>
-    <a  class="btn btn-primary mb-4" href = '#'>details</a>
-            </div>
-        </div>
+        @endforeach
 
-        <div class="card text-center mb-5 mt-5 bg-info">
-        <h2 class="display-4"> zoekertje 3</h2>
-        <p> handboek Laravel</p>
-            <div>
-            <a  class="btn btn-primary mb-4" href = '#'>details</a>
-            </div>
-        </div>
 
 
     </div>
