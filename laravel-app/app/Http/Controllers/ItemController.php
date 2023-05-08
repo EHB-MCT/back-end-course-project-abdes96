@@ -27,7 +27,7 @@ class ItemController extends Controller
     {
         $this->validate($request, [
 
-            'title' => 'required|min:5',
+            'title' => 'required|max:20',
             'content' => 'required'
         ]);
         $item = new item([
@@ -35,7 +35,7 @@ class ItemController extends Controller
             'content' => $request->input('content')
         ]);
         $item->save();
-        return redirect()->route('admin.index')->with('success', 'Item created successfully!');
+        return redirect()->route('home')->with('success', 'Item created successfully!');
 
 
     }

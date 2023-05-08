@@ -15,19 +15,19 @@ class ItemsTableSeeder extends Seeder
         $item = new Item([
             'title'=> 'test',
             'content'=> 'test'
-            ]);
+        ]);
         $item->save();
 
         $item = new Item([
             'title'=> 'test1',
             'content'=> 'test1'
-            ]);
+        ]);
         $item->save();
 
         $item = new Item([
             'title'=> 'test2',
             'content'=> 'test2'
-            ]);
+        ]);
         $item->save();
 
 
