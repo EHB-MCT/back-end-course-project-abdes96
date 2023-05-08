@@ -11,7 +11,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " href="{{route('about') }}">About</a>
+                <a class="nav-link " href="{{route('about') }}">Logout</a>
             </li>
         </ul>
 

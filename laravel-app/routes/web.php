@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,6 +28,11 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //generic routes
+
+Route::get('/questionnaire/{id}', 'QuestionnaireController@show')->name('questionnaire.show');
+Route::post('/questionnaire/{id}/submit', 'QuestionnaireController@submit')->name('questionnaire.submit');
+
+
 Route::get('/', [
     'uses' => 'App\Http\Controllers\ItemController@getIndex',
     'as' => 'home'
@@ -52,6 +54,7 @@ Route::post('/itemcreate', [
     'uses' => 'App\Http\Controllers\ItemController@postCreateItem',
     'as' =>'itemcreate'
 ]);
+
 
 // edit item route
 Route::post('/itemedit', function () {
