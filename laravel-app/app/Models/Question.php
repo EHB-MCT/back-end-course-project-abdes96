@@ -16,11 +16,8 @@ class Question extends Model
 
     public function list()
     {
-        return $this->belongsTo(Lists::class);
+        return $this->belongsTo(Lists::class, );
     }
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
+
 }

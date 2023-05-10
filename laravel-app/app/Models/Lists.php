@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Lists extends Model
 {
     use HasFactory;
-    protected $table = 'lists';
     protected $fillable = [
-        'title', 'description', 'scoring', 'layout', 'questions'
+        'title', 'description',
+
     ];
 
-    public function sessions()
+    public function questions()
     {
-        return $this->hasMany(Session::class);
+        return $this->hasMany(Question::class);
     }
+
 
 }

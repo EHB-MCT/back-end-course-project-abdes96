@@ -16,7 +16,7 @@ use App\Http\Controllers\AdminControllers;
 */
 
 
-Route::get('/dashboard', function () {
+Route::get('/home', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
