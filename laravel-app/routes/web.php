@@ -51,9 +51,9 @@ Route::get('/item/{id}', [
 
 
 //create item route
-Route::post('/itemcreate', [
-    'uses' => 'App\Http\Controllers\ItemController@postCreateItem',
-    'as' =>'itemcreate'
+Route::post('/listcreation', [
+    'uses' => 'App\Http\Controllers\ListController@getCreate',
+    'as' =>'ListCreate'
 ]);
 
 

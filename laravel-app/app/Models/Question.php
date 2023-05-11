@@ -12,6 +12,7 @@ class Question extends Model
     protected $fillable = [
         'question',
         'score',
+        'lists_id',
     ];
 
     public function list()

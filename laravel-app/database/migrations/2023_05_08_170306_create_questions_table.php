@@ -17,7 +17,7 @@ return new class extends Migration
 
                 $table->id();
                 $table->string('question');
-                $table->integer('score');
+            $table->integer('score')->nullable();
                 $table->foreignId('lists_id')->constrained('lists')->onDelete('cascade');
                 $table->timestamps();
             });

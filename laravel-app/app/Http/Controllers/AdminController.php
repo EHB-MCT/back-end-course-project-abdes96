@@ -54,10 +54,10 @@ class AdminController extends Controller
 
     public function deleteItem($id)
     {
-        $item = Item::find($id);
+        $list = Lists::find($id);
 
-            $item->delete();
-        return redirect()->action([AdminController::class, 'getIndex'])->with('success', 'Item deleted successfully!');;
+            $list->delete();
+        return redirect()->action([AdminController::class, 'getIndex'])->with('success', 'List deleted successfully!');;
 
 
 
