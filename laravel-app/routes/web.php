@@ -16,7 +16,7 @@ use App\Http\Controllers\AdminControllers;
 */
 
 
-Route::get('/home', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -56,7 +56,10 @@ Route::post('/listcreation', [
     'as' =>'ListCreate'
 ]);
 
-
+Route::post('/listupdated', [
+    'as' => 'admin.update',
+    'uses' => 'App\Http\Controllers\ListController@postUpdateList'
+]);
 // edit item route
 Route::post('/itemedit', function () {
     return redirect()->route('admin.index');
@@ -84,11 +87,7 @@ Route::group(['prefix' => 'admin'], function () {
         'uses' => 'App\Http\Controllers\AdminController@getEdit'
     ]);
 
-    // Update
-    Route::post('update', [
-        'as' => 'admin.update',
-        'uses' => 'App\Http\Controllers\AdminController@postUpdateItem'
-    ]);
+
 
     Route::get('delete/{id}', [
         'as' => 'admin.delete',

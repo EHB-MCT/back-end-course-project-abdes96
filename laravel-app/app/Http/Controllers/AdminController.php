@@ -30,27 +30,12 @@ class AdminController extends Controller
 
     public function getEdit($id)
     {
-        $item = Item::find($id);
-        return view('admin.edit', ['item'=>$item]);
+        $list = Lists::find($id);
+        return view('admin.edit', ['list'=>$list]);
     }
 
 
-    public function postUpdateItem(Request $request) {
 
-        $this->validate($request, [
-
-            'title' => 'required|min:5',
-            'content' => 'required'
-        ]);
-
-        $item = item::find($request->input('id'));
-        //updating
-        $item ->title= $request->input('title');
-        $item ->content= $request->input('content');
-        $item->save();
-        return redirect()->route('admin.index')->with('success', 'Item updated successfully!');
-
-    }
 
     public function deleteItem($id)
     {
