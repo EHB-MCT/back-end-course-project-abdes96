@@ -28,23 +28,30 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//generic routes
-
-Route::get('/questionnaire/{id}', 'QuestionnaireController@show')->name('questionnaire.show');
-Route::post('/questionnaire/{id}/submit', 'QuestionnaireController@submit')->name('questionnaire.submit');
-
 
 Route::get('/', [
-    'uses' => 'App\Http\Controllers\ItemController@getIndex',
+    'uses' => 'App\Http\Controllers\ListController@getIndex',
     'as' => 'home'
 ]);
+
+Route::get('/lists/{id}', [
+    'uses' => 'App\Http\Controllers\ListController@show',
+    'as' => 'lists'
+]);
+Route::post('listsAnswers/{id}', [
+    'uses' => 'App\Http\Controllers\ListController@showAnswers',
+    'as' => 'answer'
+]);
+
+
+
 
 
 Route::get('/about', function () {
     return view('other.about');
 })->name('about');
 
-Route::get('/item/{id}', [
+Route::get('/item', [
     'uses' => 'App\Http\Controllers\ItemController@getItem',
     'as' => 'item'
 ]);
@@ -72,6 +79,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('', [
         'uses' => 'App\Http\Controllers\AdminController@getIndex',
         'as' => 'admin.index',
+
+    ]);
+
+    Route::get('/stats/{id}', [
+        'uses' => 'App\Http\Controllers\AdminController@getStatistics',
+        'as' => 'list.statistics',
 
     ]);
 

@@ -1,30 +1,31 @@
 @extends('layouts.master')
 
 @section('content')
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    <div class="container">
-
-        @foreach($items as $item)
     <div class="jumbotron">
-
-         <h2 class="display-4"> Was je tevreden?</h2>
-        <p class="lead"> {{$item['title']}}
-        </p>
-        <p>{{$item['content']}}</p>
-        <div>
-        <a  class="btn btn-primary   mb-4" href="{{route('item',['id' => $item->id]) }}" role="button" >details</a>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="jumbotron bg-info text-white">
+                    <h1 class="display-4">Welkom bij de Kinesis Therapy Vragenlijst</h1>
+                    <p class="lead">Hieronder vindt u de beschikbare lijsten. Klik op de knop om de vragenlijst in te vullen.</p>
+                </div>
+                <div class="card-deck">
+                    @foreach($lists as $key => $list)
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $list->title }}</h5>
+                                <p class="card-text">{{ $list->description }}</p>
+                                <a href="{{ route('lists', ['id' => $list->id]) }}" class="btn btn-primary">Vragenlijst {{ $key + 1 }}</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-
-        @endforeach
-
-
-
-    </div>
-
-
 @endsection

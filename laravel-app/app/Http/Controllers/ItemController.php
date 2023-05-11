@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class ItemController extends Controller
 {
     //
-    public function getIndex()
-    {
 
-        $items = Item::orderby('created_at', 'desc')->get();
 
-        return view('content.index', ['items' => $items]);
-
-    }
 
     public function getItem($id){
         $item = Item::where('id',$id)->first();

@@ -23,6 +23,16 @@ class AdminController extends Controller
 
         return view('admin.index', ['lists' => $lists]);
     }
+
+    public function getStatistics($id)
+    {
+        $list = Lists::findOrFail($id);
+
+
+        return view('admin.statistics', compact('list'));
+    }
+
+
     public function getCreate()
     {
         return view('admin.create');
