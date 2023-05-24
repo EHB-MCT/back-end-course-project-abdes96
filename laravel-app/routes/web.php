@@ -20,11 +20,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+
 
 require __DIR__.'/auth.php';
 
@@ -47,9 +50,7 @@ Route::post('listsAnswers/{id}', [
 
 
 
-Route::get('/about', function () {
-    return view('other.about');
-})->name('about');
+
 
 Route::get('/item', [
     'uses' => 'App\Http\Controllers\ItemController@getItem',
@@ -74,7 +75,7 @@ Route::post('/itemedit', function () {
 })->name('');
 
 //admin routes
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {
 //home
     Route::get('', [
         'uses' => 'App\Http\Controllers\AdminController@getIndex',
