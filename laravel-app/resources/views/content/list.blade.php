@@ -28,16 +28,38 @@
                             @foreach ($list->questions as $question)
                                 <div class="form-group">
                                     <label for="question{{ $question->id }}" class="text-white">{{ $question->question }}</label>
-                                    <input type="number" class="form-control" name="answers[{{ $question->id }}]" id="question{{ $question->id }}" min="1" max="10">
+                                    <div class="range-slider">
+                                        <input type="range" class="form-range" name="answers[{{ $question->id }}]" id="question{{ $question->id }}" min="1" max="10">
+                                        <p class="score bigger-score" id="score{{ $question->id }}">6</p>
+                                    </div>
                                 </div>
                             @endforeach
+
+
                             <input type="hidden" name="list_id" value="{{ $list->id }}">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-lg d-block mx-auto mt-5">Stuur</button>
                         </form>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
+    </div> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input[name^="answers["]');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    const questionId = input.id.replace('question', '');
+                    const scoreSpan = document.getElementById(`score${questionId}`);
+                    const score = parseInt(input.value) || 0;
+                    scoreSpan.textContent = score;
+                });
+            });
+        });
+    </script>
+@endsection
+
+@section('scripts')
+
 @endsection

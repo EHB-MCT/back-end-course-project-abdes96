@@ -1,0 +1,55 @@
+.range-slider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-range {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    border-radius: 5px;
+    background-color: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.form-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.score {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .score {
+        top: -25px;
+        font-size: 14px;
+    }
+}
+
