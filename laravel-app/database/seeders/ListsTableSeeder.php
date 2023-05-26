@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Lists;
 use App\Models\Question;
+use App\Models\Answer;
 
 
 class ListsTableSeeder extends Seeder
@@ -18,6 +19,7 @@ class ListsTableSeeder extends Seeder
         $list = Lists::create([
             'title' => 'Example List singuse',
             'description' => 'This is an example list',
+            'completed' => true,
             'list_type' => 'single',
 
         ]);
@@ -51,6 +53,12 @@ class ListsTableSeeder extends Seeder
             $question->score = $questionData['score'];
 
             $list->questions()->save($question);
+
+            $answer = new Answer();
+            $answer->list_id = $list->id;
+            $answer->question_id = $question->id;
+            $answer->answer = $questionData['score'];
+            $answer->save();
         }
 
 
