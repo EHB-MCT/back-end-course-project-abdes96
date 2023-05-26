@@ -16,8 +16,10 @@ class ListsTableSeeder extends Seeder
     public function run()
     {
         $list = Lists::create([
-            'title' => 'Example List',
+            'title' => 'Example List singuse',
             'description' => 'This is an example list',
+            'list_type' => 'single',
+
         ]);
 
         $questions = [
@@ -27,6 +29,18 @@ class ListsTableSeeder extends Seeder
             ],
             [
                 'question' => 'Question 2',
+                'score' => 8,
+            ],
+            [
+                'question' => 'Question 3',
+                'score' => 8,
+            ],
+            [
+                'question' => 'Question 4',
+                'score' => 8,
+            ],
+            [
+                'question' => 'Question 5',
                 'score' => 8,
             ],
         ];

@@ -1,10 +1,17 @@
 @extends('layouts.master')
+@include('partials.header')
 
 @section('content')
     <div class="jumbotron">
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
     <div class="container">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Lists;
 use App\Models\Question;
+use App\Models\Answer;
+
 use Illuminate\Support\Facades\Validator;
 
 
@@ -40,14 +42,20 @@ class ListController extends Controller
             'answers.*.max' => 'Antwoorden mogen maximaal 10 zijn.',
         ]);
 
-        foreach ($list->questions as $question) {
-            $answer = $validatedData['answers'][$question->id];
+        foreach ($validatedData['answers'] as $questionId => $answer) {
+            $question = Question::findOrFail($questionId);
             $question->score = $answer;
             $question->save();
-            $list->completed = true;
-            $list->save();
 
+            $answerModel = new Answer();
+            $answerModel->list_id = $list->id;
+            $answerModel->question_id = $question->id;
+            $answerModel->answer = $answer;
+            $answerModel->save();
         }
+
+        $list->completed = true;
+        $list->save();
 
         return redirect()->route('home')->with('success', 'Antwoorden succesvol ingediend!');
     }
@@ -60,15 +68,23 @@ class ListController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|min:10',
-            'questions' => 'required|max:255'
-    ]);
+            'questions' => 'required|max:255',
+            'list_type' => 'required|in:single,multiple',
+
+        ]);
         $title = $request->input('title');
         $description = $request->input('description');
+        $name = $request->input('name');
         $questions = $request->input('questions');
+        $type = $request->input('list_type');
+
 
         $list = Lists::create([
             'title' => $title,
             'description' => $description,
+            'client' => $name,
+            'list_type' => $type,
+
         ]);
 
         foreach ($questions as $questionData) {

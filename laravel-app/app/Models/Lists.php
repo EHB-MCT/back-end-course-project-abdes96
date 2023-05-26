@@ -11,7 +11,6 @@ class Lists extends Model
     protected $fillable = [
         'title',
         'description',
-        'name',
         'client',
         'completed',
 

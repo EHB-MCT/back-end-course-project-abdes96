@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@include('partials.admin-header')
+
 @section('content')
     <div class="container">
         <div class="jumbotron">
@@ -18,10 +20,10 @@
             </div>
 
 
-                @foreach($lists as $list)
-                    <div class="card text-center mt-3">
-                        <div class="card-header">
-                            <h5 class="card-title">Vragenlijst</h5>
+            @foreach($lists as $list)
+                <div class="card text-center mt-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Vragenlijst</h5>
                         <div class="mt-2">
                             @if($list->completed)
                                 <span class="badge badge-success">Vragenlijst Voltooid</span>

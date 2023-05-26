@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@include('partials.header')
 
 @section('content')
     <div class="container">

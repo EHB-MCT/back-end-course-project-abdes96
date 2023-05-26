@@ -21,7 +21,21 @@
                                 <label for="description">Description</label>
                                 <input type="text" class="form-control" name="description" placeholder="Enter description">
                             </div>
-
+                            <div class="form-group">
+                                <label for="description">Client name </label>
+                                <input type="text" class="form-control" name="name" placeholder="Enter Clients name">
+                            </div>
+                            <div class="form-group">
+                                <label for="list_type">List Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="list_type" value="single" >
+                                    <label class="form-check-label" for="list_type">Single User List</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="list_type" value="multiple" checked>
+                                    <label class="form-check-label" for="list_type">Multiple Users List</label>
+                                </div>
+                            </div>
                             <h3>Questions</h3>
                             @for ($i = 1; $i <= 5; $i++)
                                 <div class="form-group">
