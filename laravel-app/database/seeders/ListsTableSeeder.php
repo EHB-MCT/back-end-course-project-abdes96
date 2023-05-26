@@ -17,35 +17,40 @@ class ListsTableSeeder extends Seeder
     public function run()
     {
         $list = Lists::create([
-            'title' => 'Example List singuse',
-            'description' => 'This is an example list',
+            'title' => 'Beoordeel je eerste sessie',
+            'description' => 'Een lijst met vragen om feedback te verzamelen van klanten na een kinesissessie. De vragen helpen bij het evalueren van de algehele ervaring, nut van oefeningen, opvolgen van instructies, uitdaging en behaalde resultaten.',
             'completed' => true,
-            'list_type' => 'single',
+            'list_type' => 'multiple',
 
         ]);
 
         $questions = [
             [
-                'question' => 'Question 1',
+                'question' => 'Hoe zou je de algehele ervaring van de kinesissessie beoordelen? (1-10)',
                 'score' => 5,
+                'list_id' => $list->id,
             ],
             [
-                'question' => 'Question 2',
+                'question' => 'In hoeverre heb je gemerkt dat je flexibiliteit en mobiliteit zijn verbeterd na de Kinesis therapie? (1-10)',
                 'score' => 8,
+                'list_id' => $list->id,
             ],
             [
-                'question' => 'Question 3',
-                'score' => 8,
+                'question' => 'Hoe goed kon je je concentreren en focussen tijdens de Kinesis therapie? (1-10)',
+                'score' => 3,
+                'list_id' => $list->id,
             ],
             [
-                'question' => 'Question 4',
-                'score' => 8,
+                'question' => 'In welke mate heb je een gevoel van welzijn en ontspanning ervaren na de Kinesis therapie? (1-10)',
+                'score' => 6,
+                'list_id' => $list->id,
             ],
             [
-                'question' => 'Question 5',
-                'score' => 8,
+                'question' => 'In welke mate heb je een gevoel van welzijn en ontspanning ervaren na de Kinesis therapie? (1-10)',
+                'score' => 9,
+                'list_id' => $list->id,
             ],
-        ];
+            ];
 
         foreach ($questions as $questionData) {
             $question = new Question();
