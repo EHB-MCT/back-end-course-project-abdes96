@@ -23,6 +23,11 @@
                         <div class="card-header">
                             <h5 class="card-title">Vragenlijst</h5>
                         <div class="mt-2">
+                            @if($list->completed)
+                                <span class="badge badge-success">Vragenlijst Voltooid</span>
+                            @else
+                                <span class="badge badge-danger">Vragenlijst Niet Voltooid</span>
+                            @endif
                             <a class="btn btn-success" href="{{ route('list.statistics', ['id' => $list->id]) }}" role="button">Bekijk Statistieken</a>
                         </div>
                     </div>

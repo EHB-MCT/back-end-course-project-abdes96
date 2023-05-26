@@ -9,7 +9,12 @@ class Lists extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'description',
+        'title',
+        'description',
+        'name',
+        'client',
+        'completed',
+
 
     ];
 

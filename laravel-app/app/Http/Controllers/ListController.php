@@ -30,6 +30,7 @@ class ListController extends Controller
     {
         $list = Lists::findOrFail($id);
 
+
         $validatedData = $request->validate([
             'answers.*' => 'required|integer|min:1|max:10',
         ], [
@@ -43,6 +44,9 @@ class ListController extends Controller
             $answer = $validatedData['answers'][$question->id];
             $question->score = $answer;
             $question->save();
+            $list->completed = true;
+            $list->save();
+
         }
 
         return redirect()->route('home')->with('success', 'Antwoorden succesvol ingediend!');

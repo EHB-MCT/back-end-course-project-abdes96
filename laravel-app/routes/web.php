@@ -40,7 +40,8 @@ Route::get('/', [
 Route::get('/lists/{id}', [
     'uses' => 'App\Http\Controllers\ListController@show',
     'as' => 'lists'
-]);
+])->middleware('checkListCompletion');
+
 Route::post('listsAnswers/{id}', [
     'uses' => 'App\Http\Controllers\ListController@showAnswers',
     'as' => 'answer'
