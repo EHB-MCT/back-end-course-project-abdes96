@@ -35,8 +35,11 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-text">Titel: {{ $list->title }}</h4>
-                        <p class="card-text">Beschrijving: {{ $list->description }}</p>
-                        <h5 class="card-title">Vragen</h5>
+                        <p class="card-text ">Beschrijving: {{ $list->description }}</p>
+                        @if($list->client)
+                            <h5 class="card-text text-left" >Klantnaam: {{ $list->client }}</h5>
+                        @endif
+                        <h6 class="card-title">Vragen</h6>
                         <ul class="list-group">
                             @foreach($list->questions as $question)
                                 <li class="list-group-item">{{ $question->question }}</li>
@@ -47,7 +50,9 @@
                             <a class="btn btn-primary" href="{{ route('admin.edit', ['id' => $list->id]) }}" role="button">Bewerken</a>
                             <a class="btn btn-danger" href="{{ route('admin.delete', ['id' => $list->id]) }}" role="button">Verwijderen</a>
                         </div>
-
+                        <div class="mt-4">
+                            <p><strong>Lijst URL:</strong> <a href="{{ route('lists', ['id' => $list->id]) }}">{{ route('lists', ['id' => $list->id]) }}</a></p>
+                        </div>
                     </div>
                 </div>
             @endforeach

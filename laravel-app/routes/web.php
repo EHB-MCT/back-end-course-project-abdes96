@@ -53,10 +53,6 @@ Route::post('listsAnswers/{id}', [
 
 
 
-Route::get('/item', [
-    'uses' => 'App\Http\Controllers\ItemController@getItem',
-    'as' => 'item'
-]);
 
 
 //create item route

@@ -96,9 +96,10 @@ class ListController extends Controller
             $list->questions()->save($question);
         }
 
+        $url = route('lists', ['id' => $list->id]);
 
 
-        return redirect()->route('admin.index')->with('success', 'List created successfully');
+        return redirect()->route('admin.index')->with('success', 'List created successfully.URL: '.$url);
     }
 
 
@@ -142,8 +143,9 @@ class ListController extends Controller
                     'question' => $question,
                 ]);
             }
+        $url = route('lists', ['id' => $list->id]);
 
-            return redirect()->route('admin.index')->with('success', 'List updated successfully');
+        return redirect()->route('admin.index')->with('success', 'List updated successfully! URL: '.$url);
         }
 
 

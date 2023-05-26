@@ -12,7 +12,10 @@
                     <div class="card-body">
                         <h2 class="text-center">{{ $list->title }}</h2>
                         <h5 class="text-center">{{ $list->description }}</h5>
-                        <h3>Questions:</h3>
+                        @if($list->client)
+                            <h6 class="card-text">{{ $list->client }}</h6>
+                        @endif
+                        <h3>Vragen:</h3>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -33,6 +36,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

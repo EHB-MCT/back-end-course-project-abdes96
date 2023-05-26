@@ -4,12 +4,11 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <a href="{{ route('admin.index') }}" class="btn btn-primary mt-3">Terug</a>
 
-            <h1>{{ $list->title }}</h1>
-            <p>{{ $list->description }}</p>
+            <h1>titel: {{ $list->title }}</h1>
+            <p>beschrijving: {{ $list->description }}</p>
 
-            <h2>Vragen</h2>
+            <h2>Scores</h2>
             <ul>
                 @foreach ($list->questions as $question)
                     <li>
@@ -19,6 +18,8 @@
             </ul>
 
             <h2>Statistieken</h2>
+            <a href="{{ route('admin.index') }}" class="btn btn-primary mt-3">Terug</a>
+
             <canvas id="chart"></canvas>
         </div>
     </div>
