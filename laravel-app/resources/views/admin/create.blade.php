@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label for="list_type">List Type</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="list_type" value="single" >
+                                    <input class="form-check-input" type="radio" name="list_type" value="single">
                                     <label class="form-check-label" for="list_type">Single User List</label>
                                 </div>
                                 <div class="form-check">
@@ -40,7 +40,7 @@
                             @for ($i = 1; $i <= 5; $i++)
                                 <div class="form-group">
                                     <label for="question{{ $i }}">Question {{ $i }}</label>
-                                    <input type="text" class="form-control" name="questions[]" placeholder="Enter question">
+                                    <input type="text" class="form-control" name="questions[]" placeholder="Enter question" >
                                 </div>
                             @endfor
 

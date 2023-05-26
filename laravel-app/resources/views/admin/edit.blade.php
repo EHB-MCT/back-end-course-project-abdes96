@@ -20,7 +20,23 @@
                                 <label for="description">Description</label>
                                 <input type="text" class="form-control" name="description" value="{{ $list->description }}" placeholder="Enter description">
                             </div>
-
+                            @if ($list->client)
+                                <div class="form-group">
+                                    <label for="name">Client Name</label>
+                                    <input type="text" class="form-control" name="name" value="{{ $list->client }}" placeholder="Enter client name">
+                                </div>
+                            @endif
+                            <div class="form-group">
+                                <label for="list_type">List Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="list_type" value="single" {{ $list->list_type === 'single' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="list_type">Single User List</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="list_type" value="multiple" {{ $list->list_type === 'multiple' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="list_type">Multiple Users List</label>
+                                </div>
+                            </div>
                             <h3>Questions</h3>
                             @foreach($list->questions as $index => $question)
                                 <div class="form-group">

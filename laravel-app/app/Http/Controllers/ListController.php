@@ -68,10 +68,12 @@ class ListController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|min:10',
-            'questions' => 'required|max:255',
+            'name' => 'required_if:list_type,single|max:255',
             'list_type' => 'required|in:single,multiple',
-
+            'questions' => 'required|array|min:5',
+            'questions.*' => 'required|max:255',
         ]);
+
         $title = $request->input('title');
         $description = $request->input('description');
         $name = $request->input('name');
@@ -109,6 +111,8 @@ class ListController extends Controller
                 'description' => 'required|min:10',
                 'questions' => 'required|array',
                 'questions.*' => 'required|max:255',
+                'list_type' => 'required|in:single,multiple',
+
             ]);
 
             $list = Lists::find($request->input('id'));
@@ -119,7 +123,14 @@ class ListController extends Controller
 
             $list->title = $request->input('title');
             $list->description = $request->input('description');
+        $list->list_type = $request->input('list_type');
+
+
+        if ($request->has('name')) {
+            $list->client = $request->input('name');
+        }
             $list->save();
+
 
             // Update questions
             $questions = $request->input('questions');

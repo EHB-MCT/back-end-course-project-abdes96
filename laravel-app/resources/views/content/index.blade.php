@@ -23,13 +23,15 @@
                 </div>
                 <div class="card-deck">
                     @foreach($lists as $key => $list)
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $list->title }}</h5>
-                                <p class="card-text">{{ $list->description }}</p>
-                                <a href="{{ route('lists', ['id' => $list->id]) }}" class="btn btn-primary">Vragenlijst {{ $key + 1 }}</a>
+                        @if($list->list_type === 'multiple')
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $list->title }}</h5>
+                                    <p class="card-text">{{ $list->description }}</p>
+                                    <a href="{{ route('lists', ['id' => $list->id]) }}" class="btn btn-primary">Vragenlijst {{ $key + 1 }}</a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>

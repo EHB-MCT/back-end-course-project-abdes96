@@ -12,9 +12,8 @@ class Lists extends Model
         'title',
         'description',
         'client',
+        'list_type',
         'completed',
-
-
     ];
 
     public function questions()
