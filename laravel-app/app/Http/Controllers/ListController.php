@@ -60,8 +60,44 @@ class ListController extends Controller
         return redirect()->route('home')->with('success', 'Antwoorden succesvol ingediend!');
     }
 
+    protected function handleAction(Request $request)
+    {
+        if ($request->has('preview')) {
+
+            return $this->showPreview($request);
+        } else {
+            return $this->createList($request);
+        }
+    }
 
 
+    protected function showPreview(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|min:10',
+            'name' => 'required_if:list_type,single|max:255',
+            'list_type' => 'required|in:single,multiple',
+            'questions' => 'required|array|min:5',
+            'questions.*' => 'required|max:255',
+        ]);
+
+        $title = $validatedData['title'];
+        $description = $validatedData['description'];
+        $name = $validatedData['name'];
+        $questions = $validatedData['questions'];
+        $type = $validatedData['list_type'];
+
+        $list = [
+            'title' => $title,
+            'description' => $description,
+            'client' => $name,
+            'list_type' => $type,
+            'questions' => $questions,
+        ];
+
+        return view('admin.listPreview', compact('list'));
+    }
 
     public function getCreate(Request $request)
     {

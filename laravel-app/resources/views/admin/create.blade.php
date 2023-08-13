@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -11,8 +10,7 @@
                     </div>
                     <div class="card-body">
                         @include('partials.error')
-
-                        <form method="post" action="{{ route('ListCreate') }}">
+                        <form method="post" action="{{ route('ListAction') }}" id="listCreateForm">
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" class="form-control" name="title" placeholder="Enter title">
@@ -22,7 +20,7 @@
                                 <input type="text" class="form-control" name="description" placeholder="Enter description">
                             </div>
                             <div class="form-group">
-                                <label for="description">Klant naam (voor prive lijst) </label>
+                                <label for="description">Klant naam (voor prive lijst)</label>
                                 <input type="text" class="form-control" name="name" placeholder="Enter Clients name">
                             </div>
                             <div class="form-group">
@@ -40,22 +38,23 @@
                             @for ($i = 1; $i <= 5; $i++)
                                 <div class="form-group">
                                     <label for="question{{ $i }}">Vraag {{ $i }}</label>
-                                    <input type="text" class="form-control" name="questions[]" placeholder="Enter question" >
+                                    <input type="text" class="form-control" name="questions[]" placeholder="Enter question">
                                 </div>
                             @endfor
 
                             @csrf
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                            <button type="submit" class="btn btn-secondary" name="preview" value="1" >Preview</button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
+
     @if(session('listCreated'))
         <script>
             var listId = "{{ session('listCreated') }}";

@@ -55,7 +55,9 @@ Route::post('listsAnswers/{id}', [
 
 
 
-//create item route
+
+
+//create list route
 Route::post('/listcreation', [
     'uses' => 'App\Http\Controllers\ListController@getCreate',
     'as' =>'ListCreate'
@@ -90,6 +92,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {
     Route::get('create', [
         'as' => 'admin.create',
         'uses' => 'App\Http\Controllers\AdminController@getCreate'
+    ]);
+
+    Route::get('/listpreview', [
+        'as' => 'admin.listPreview',
+        'uses' => 'App\Http\Controllers\ListController@showPreview',
+    ]);
+
+    Route::post('/listaction', [
+        'as' => 'ListAction',
+        'uses' => 'App\Http\Controllers\ListController@handleAction',
     ]);
 
     // Edit
