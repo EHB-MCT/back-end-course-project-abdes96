@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title">Create List</h1>
@@ -20,8 +20,8 @@
                                 <input type="text" class="form-control" name="description" placeholder="Enter description">
                             </div>
                             <div class="form-group">
-                                <label for="description">Klant naam (voor prive lijst)</label>
-                                <input type="text" class="form-control" name="name" placeholder="Enter Clients name">
+                                <label for="name">Klant naam (voor prive lijst)</label>
+                                <input type="text" class="form-control" name="name" placeholder="Enter Client's name">
                             </div>
                             <div class="form-group">
                                 <label for="list_type">List Type</label>
@@ -44,17 +44,68 @@
 
                             @csrf
                             <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-                            <button type="submit" class="btn btn-secondary" name="preview" value="1" >Preview</button>
+                            <button type="button" class="btn btn-secondary" id="previewBtn">Preview</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="previewSection" style="display: none;">
+                    <!-- Preview content will be loaded here -->
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h1 class="card-title">Preview Vragenlijst</h1>
+                        </div>
+                        <div class="card-body" id="previewContent">
+                            <!-- Preview content will be dynamically loaded here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('DOMContentLoaded');
+
+                const previewBtn = document.getElementById('previewBtn');
+                const previewSection = document.getElementById('previewSection');
+                const previewContent = document.getElementById('previewContent');
+                const form = document.getElementById('listCreateForm');
+
+                function loadPreview() {
+                    console.log('loadPreview');
+                    const previewUrl = '{{ route("admin.listPreview") }}';
+                    // Get form data
+                    const formData = new FormData(form);
+
+                    fetch(previewUrl, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            previewContent.innerHTML = data;
+                            previewSection.style.display = 'block';
+                        })
+                        .catch(error => {
+                            console.error('Error loading preview:', error);
+                        });
+                }
+
+                previewBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadPreview();
+                });
+
+
+            });
+        </script>
+
 @endsection
-
 @push('scripts')
-
     @if(session('listCreated'))
         <script>
             var listId = "{{ session('listCreated') }}";

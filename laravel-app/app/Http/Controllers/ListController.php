@@ -66,7 +66,7 @@ class ListController extends Controller
 
             return $this->showPreview($request);
         } else {
-            return $this->createList($request);
+            return $this->getCreate($request);
         }
     }
 

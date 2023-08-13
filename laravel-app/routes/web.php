@@ -94,7 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {
         'uses' => 'App\Http\Controllers\AdminController@getCreate'
     ]);
 
-    Route::get('/listpreview', [
+    Route::post('/listpreview', [
         'as' => 'admin.listPreview',
         'uses' => 'App\Http\Controllers\ListController@showPreview',
     ]);

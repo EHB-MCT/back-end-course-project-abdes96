@@ -9,10 +9,10 @@
                         <h1 class="text-white">Preview Vragenlijst</h1>
                     </div>
                     <div class="card-body">
-                        <h2 class="text-center">{{ $list['title'] }}</h2>
-                        <h5 class="text-center">{{ $list['description'] }}</h5>
+                        <h2 class="text-center">{{ old('title', $list['title']) }}</h2>
+                        <h5 class="text-center">{{ old('description', $list['description']) }}</h5>
                         @if ($list['client'])
-                            <h6 class="card-text">{{ $list['client'] }}</h6>
+                            <h6 class="card-text">{{ old('client', $list['client']) }}</h6>
                         @endif
                         <h3>Vragen:</h3>
                         <form>
@@ -26,6 +26,13 @@
                                 </div>
                             @endforeach
                         </form>
+                        <a href="{{ route('admin.create', [
+    'title' => $list['title'],
+    'description' => $list['description'],
+    'name' => $list['client'],
+    'list_type' => $list['list_type'],
+    'questions' => $list['questions'],
+]) }}" class="btn btn-secondary mt-4">Return</a>
                     </div>
                 </div>
             </div>
