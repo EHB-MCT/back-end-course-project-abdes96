@@ -73,7 +73,7 @@ class ListController extends Controller
 
     protected function showPreview(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'description' => 'required|min:10',
             'name' => 'required_if:list_type,single|max:255',
@@ -82,21 +82,29 @@ class ListController extends Controller
             'questions.*' => 'required|max:255',
         ]);
 
-        $title = $validatedData['title'];
-        $description = $validatedData['description'];
-        $name = $validatedData['name'];
-        $questions = $validatedData['questions'];
-        $type = $validatedData['list_type'];
+        if ($validator->fails()) {
+            // Validation failed, return JSON response with errors
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            // Validation passed, return HTML response with the preview
+            $title = $request->input('title');
+            $description = $request->input('description');
+            $name = $request->input('name');
+            $questions = $request->input('questions');
+            $type = $request->input('list_type');
 
-        $list = [
-            'title' => $title,
-            'description' => $description,
-            'client' => $name,
-            'list_type' => $type,
-            'questions' => $questions,
-        ];
+            $list = [
+                'title' => $title,
+                'description' => $description,
+                'client' => $name,
+                'list_type' => $type,
+                'questions' => $questions,
+            ];
 
-        return view('admin.listPreview', compact('list'));
+            $previewHtml = view('admin.listPreview', compact('list'))->render();
+
+            return response()->json(['previewHtml' => $previewHtml]);
+        }
     }
 
     public function getCreate(Request $request)

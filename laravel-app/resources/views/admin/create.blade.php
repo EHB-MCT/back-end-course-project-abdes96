@@ -1,15 +1,20 @@
+
 @extends('layouts.admin')
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title">Create List</h1>
                     </div>
                     <div class="card-body">
+                        <div id="formErrors">
+
                         @include('partials.error')
+                        </div>
+
                         <form method="post" action="{{ route('ListAction') }}" id="listCreateForm">
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -21,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Klant naam (voor prive lijst)</label>
-                                <input type="text" class="form-control" name="name" placeholder="Enter Client's name">
+                                <input type="text" class="form-control" name="name" placeholder="Enter Clients name">
                             </div>
                             <div class="form-group">
                                 <label for="list_type">List Type</label>
@@ -48,32 +53,55 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div id="previewSection" style="display: none;">
-                    <!-- Preview content will be loaded here -->
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h1 class="card-title">Preview Vragenlijst</h1>
-                        </div>
-                        <div class="card-body" id="previewContent">
-                            <!-- Preview content will be dynamically loaded here -->
-                        </div>
+
+        </div>
+    </div>
+        <div class="modal " id="previewModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Preview Vragenlijst</h5>
+                        <button type="button" class="close" id="closePreviewModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="previewContent">
+                        <!-- Preview  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closePreviewBtn">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <script>
+
+
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
                 console.log('DOMContentLoaded');
 
                 const previewBtn = document.getElementById('previewBtn');
-                const previewSection = document.getElementById('previewSection');
+                const closePreviewBtn = document.getElementById('closePreviewBtn');
+                const closePreviewModal = document.getElementById('closePreviewModal');
+                const previewModal = document.getElementById('previewModal');
                 const previewContent = document.getElementById('previewContent');
                 const form = document.getElementById('listCreateForm');
+
+
+                function displayErrors(errors) {
+                    let errorHtml = '';
+                    for (let key in errors) {
+                        if (errors.hasOwnProperty(key)) {
+                            errorHtml += '<div class="alert alert-danger">' + errors[key] + '</div>';
+                        }
+                    }
+
+                    // Set the error messages in the create form error container
+                    const errorContainer = document.getElementById('formErrors');
+                    errorContainer.innerHTML = errorHtml;
+                }
 
                 function loadPreview() {
                     console.log('loadPreview');
@@ -85,10 +113,15 @@
                         method: 'POST',
                         body: formData,
                     })
-                        .then(response => response.text())
+                        .then(response => response.json())
                         .then(data => {
-                            previewContent.innerHTML = data;
-                            previewSection.style.display = 'block';
+                            if (data.errors) {
+                                console.log('Validation errors:', data.errors);
+                                displayErrors(data.errors);
+                            } else {
+                                previewContent.innerHTML = data.previewHtml;
+                                $(previewModal).modal('show');
+                            }
                         })
                         .catch(error => {
                             console.error('Error loading preview:', error);
@@ -100,8 +133,15 @@
                     loadPreview();
                 });
 
+                closePreviewBtn.addEventListener('click', function() {
+                    $(previewModal).modal('hide');
+                });
 
+                closePreviewModal.addEventListener('click', function() {
+                    $(previewModal).modal('hide');
+                });
             });
+
         </script>
 
 @endsection

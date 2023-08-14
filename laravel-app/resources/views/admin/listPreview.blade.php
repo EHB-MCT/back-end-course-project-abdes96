@@ -26,13 +26,7 @@
                                 </div>
                             @endforeach
                         </form>
-                        <a href="{{ route('admin.create', [
-    'title' => $list['title'],
-    'description' => $list['description'],
-    'name' => $list['client'],
-    'list_type' => $list['list_type'],
-    'questions' => $list['questions'],
-]) }}" class="btn btn-secondary mt-4">Return</a>
+
                     </div>
                 </div>
             </div>
