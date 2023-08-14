@@ -57,7 +57,7 @@
         </div>
     </div>
         <div class="modal " id="previewModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Preview Vragenlijst</h5>
@@ -98,7 +98,6 @@
                         }
                     }
 
-                    // Set the error messages in the create form error container
                     const errorContainer = document.getElementById('formErrors');
                     errorContainer.innerHTML = errorHtml;
                 }
