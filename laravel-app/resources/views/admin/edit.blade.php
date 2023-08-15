@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('layouts.master')
+@include('partials.admin-header')
 
-@include('layouts.navigation')
 @section('content')
     <div class="container">
         <div class="row">
@@ -41,14 +41,19 @@
                                 </div>
                             </div>
                             <h3>Questions</h3>
+                            <div id="questionFields">
+
                             @foreach($list->questions as $index => $question)
                                 <div class="form-group">
                                     <label for="question{{ $index + 1 }}">Question {{ $index + 1 }}</label>
                                     <input type="text" class="form-control" name="questions[]" value="{{ $question->question }}" placeholder="Enter question">
                                 </div>
                             @endforeach
+                            </div>
 
                             @csrf
+                            <button type="button" class="btn btn-secondary" id="addQuestionBtn">Add Question</button>
+
                             <input type="hidden" name="id" value="{{ $list->id }}">
                             <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -82,6 +87,44 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+
+            const addQuestionBtn = document.getElementById('addQuestionBtn');
+            const questionFields = document.getElementById('questionFields');
+
+            let questionCount = {{ count($list->questions) }}; // Set to the initial number of questions
+
+            addQuestionBtn.addEventListener('click', function() {
+                questionCount++;
+
+                const newQuestionField = document.createElement('div');
+                newQuestionField.classList.add('form-group');
+                newQuestionField.innerHTML = `
+                    <label for="question${questionCount}">Question ${questionCount}</label>
+                    <input type="text" class="form-control" name="questions[]" placeholder="Enter question">
+                    <button type="button" class="btn btn-danger remove-question-btn">Remove</button>
+                `;
+
+                questionFields.appendChild(newQuestionField);
+
+                const removeQuestionBtn = newQuestionField.querySelector('.remove-question-btn');
+                removeQuestionBtn.addEventListener('click', function() {
+                    questionFields.removeChild(newQuestionField);
+                    questionCount--;
+                    updateQuestionLabels();
+                });
+
+                updateQuestionLabels();
+            });
+
+            function updateQuestionLabels() {
+                const questionLabels = questionFields.querySelectorAll('label');
+                questionLabels.forEach((label, index) => {
+                    label.textContent = `Question ${index + 1}`;
+                });
+            }
+
+
             const previewBtn = document.getElementById('previewBtn');
             const closePreviewBtn = document.getElementById('closePreviewBtn');
             const closePreviewModal = document.getElementById('closePreviewModal');

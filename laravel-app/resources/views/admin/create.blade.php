@@ -1,5 +1,6 @@
 
-@extends('layouts.admin')
+@extends('layouts.master')
+@include('partials.admin-header')
 
 @section('content')
     <div class="container">
@@ -40,12 +41,18 @@
                                 </div>
                             </div>
                             <h3>Questions</h3>
+                            <div id="questionFields">
+
                             @for ($i = 1; $i <= 5; $i++)
+
                                 <div class="form-group">
                                     <label for="question{{ $i }}">Vraag {{ $i }}</label>
                                     <input type="text" class="form-control" name="questions[]" placeholder="Enter question">
                                 </div>
                             @endfor
+                            </div>
+
+                            <button type="button" class="btn btn-secondary" id="addQuestionBtn">Add Question</button>
 
                             @csrf
                             <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
@@ -80,7 +87,42 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('DOMContentLoaded');
+                const addQuestionBtn = document.getElementById('addQuestionBtn');
+                const questionFields = document.getElementById('questionFields');
+
+                let questionCount = 5; // Current number of questions
+
+                addQuestionBtn.addEventListener('click', function() {
+                    questionCount++;
+
+                    const newQuestionField = document.createElement('div');
+                    newQuestionField.classList.add('form-group');
+                    newQuestionField.innerHTML = `
+            <label for="question${questionCount}">Vraag ${questionCount}</label>
+            <input type="text" class="form-control" name="questions[]" placeholder="Enter question">
+            <button type="button" class="btn btn-danger remove-question-btn">Remove</button>
+        `;
+
+                    questionFields.appendChild(newQuestionField);
+
+                    // remove question
+                    const removeQuestionBtn = newQuestionField.querySelector('.remove-question-btn');
+                    removeQuestionBtn.addEventListener('click', function() {
+                        questionFields.removeChild(newQuestionField);
+                        questionCount--;
+                        updateQuestionLabels();
+                    });
+
+                    updateQuestionLabels();
+                });
+
+                // update question labels
+                function updateQuestionLabels() {
+                    const questionLabels = questionFields.querySelectorAll('label');
+                    questionLabels.forEach((label, index) => {
+                        label.textContent = `Vraag ${index + 1}`;
+                    });
+                }
 
                 const previewBtn = document.getElementById('previewBtn');
                 const closePreviewBtn = document.getElementById('closePreviewBtn');
