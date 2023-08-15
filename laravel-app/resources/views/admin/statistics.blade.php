@@ -1,5 +1,6 @@
-@extends('layouts.master')
-@include('partials.admin-header')
+@extends('layouts.admin')
+
+@include('layouts.navigation')
 
 @section('content')
     <div class="container">

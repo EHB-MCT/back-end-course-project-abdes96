@@ -19,7 +19,7 @@
             <div class="col-md-8 offset-md-2">
                 <div class="jumbotron bg-info text-white">
                     <h1 class="display-4">Welkom bij de Kinesis Therapy Vragenlijst</h1>
-                    <p class="lead">Hieronder vindt u de beschikbare lijsten. Klik op de knop om de vragenlijst in te vullen.</p>
+                    <p class="lead">Hier vind je de publieke vragenlijsten. Deze vragenlijsten zijn bedoeld als feedback over jouw ervaring na de sessies. Jouw input is erg waardevol en helpt ons onze diensten te verbeteren. We stellen het op prijs als je de vragenlijst wilt invullen. Bedankt!</p>
                 </div>
                 <div class="card-deck">
                     @foreach($lists as $key => $list)

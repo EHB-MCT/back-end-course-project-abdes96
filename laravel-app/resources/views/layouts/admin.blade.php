@@ -7,12 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <title>Hello, world!</title>
+    <title>laravel project</title>
 </head>
 <body>
 
-@include('partials.admin-header')
 
 @yield('content')
 <!-- Optional JavaScript -->
